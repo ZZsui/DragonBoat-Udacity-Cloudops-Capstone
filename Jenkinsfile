@@ -11,7 +11,7 @@ pipeline {
 	stages {
 		stage("Lint Dockerfile") {
 			steps {
-				sh "docker run --rm -i hadolint/hadolint:v1.18.0 < Dockerfile"
+				sh "docker run --rm -i hadolint/hadolint:v1.18.0 --ignore SC2102 3006 < Dockerfile"
 			}
 		}
 		stage('Build preparations') {
