@@ -11,7 +11,7 @@ pipeline {
 	stages {
 		stage("Lint Dockerfile") {
 			steps {
-				sh "sudo docker run --rm -i hadolint/hadolint:v1.17.5 < Dockerfile"
+				sh "docker run --rm -i hadolint/hadolint:v1.17.5 < Dockerfile"
 			}
 		}
 		stage('Build preparations') {
