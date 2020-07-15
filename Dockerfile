@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:latest
 
 ## Step 1: Remove all files in html folder in default nginx
 RUN rm /usr/share/nginx/html/index.html
