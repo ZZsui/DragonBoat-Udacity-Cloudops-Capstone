@@ -46,19 +46,19 @@ pipeline {
 			  }
       }
 		}
-    // stage('K8S Deploy') {
-    //   steps {
-	// 			withAWS(credentials: 'jenkins', region: 'us-west-2') {
-	// 				sh "aws eks --region us-west-2 update-kubeconfig --name UdacityCapStone-Cluster"
-	// 				// Configure deployment
-	// 				sh "kubectl apply -f k8s/deployment.yml"
-	// 				// Configure service for loadbalancing
-	// 				sh "kubectl apply -f k8s/service.yml"
-	// 				// Set created image to do a rolling update
-	// 				sh "kubectl set image deployments/$PROJECT $PROJECT=$ECRURI:$VERSION"
-	// 			}
-    //   }
-    // }
+    stage('Kubernetes Deploy') {
+      steps {
+				withAWS(credentials: 'kubectl-user-cred', region: 'us-east-1') {
+					sh "aws eks --region us-east-1 update-kubeconfig --name UdacityCapStone-Cluster"
+					// Configure deployment
+					sh "kubectl apply -f k8s/deployment.yml"
+					// Configure service for loadbalancing
+					sh "kubectl apply -f k8s/service.yml"
+					// Set created image to do a rolling update
+					sh "kubectl set image deployments/$PROJECT $PROJECT=$ECRURI:$VERSION"
+				}
+      }
+    }
   }
 	post {
 		always {
