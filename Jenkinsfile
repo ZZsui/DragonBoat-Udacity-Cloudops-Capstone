@@ -50,13 +50,14 @@ pipeline {
       steps {
 				withAWS(credentials: 'kubectl-user-cred', region: 'us-east-1') {
 					sh "aws eks --region us-east-1 update-kubeconfig --name UdacityCapStone-Cluster"
-                    sh "kubectl apply -f k8s/aws-auth-cm.yaml"
-                    sh "kubectl set image deployments/$PROJECT $PROJECT=$ECRURI:$VERSION"
+                    sh "kubectl version --short --client"
+                    // sh "kubectl apply -f k8s/aws-auth-cm.yaml"
+                    // sh "kubectl set image deployments/$PROJECT $PROJECT=$ECRURI:$VERSION"
 					
-					sh "kubectl apply -f k8s/deployment.yml"
-					sh "kubectl apply -f k8s/service.yml"
-					sh "kubectl get nodes"
-                    sh "kubectl get pods"
+					// sh "kubectl apply -f k8s/deployment.yml"
+					// sh "kubectl apply -f k8s/service.yml"
+					// sh "kubectl get nodes"
+                    // sh "kubectl get pods"
 				}
       }
     }
