@@ -48,9 +48,9 @@ pipeline {
 		}
     stage('Kubernetes Deploy') {
       steps {
-				withAWS(credentials: 'kubectl-user-cred', region: 'us-east-1') {
+				withAWS(credentials: 'aws-cred', region: 'us-east-1') {
 					sh "aws eks --region us-east-1 update-kubeconfig --name UdacityCapStone-Cluster"
-                    sh "kubectl version --short --client"
+                    sh "sudo kubectl version --short --client"
                     // sh "kubectl apply -f k8s/aws-auth-cm.yaml"
                     // sh "kubectl set image deployments/$PROJECT $PROJECT=$ECRURI:$VERSION"
 					
